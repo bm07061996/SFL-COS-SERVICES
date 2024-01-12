@@ -15,6 +15,8 @@
 
 $router->get('/', ['as' => 'api.version', 'uses' =>'ApiService@version']);
 
-$router->post('postLogin','PostLoginService@process');
+$router->group(['middleware' => ['postLoginValidator']], function () use ($router) {
+    $router->post('postLogin','PostLoginService@process');
+});
 
 

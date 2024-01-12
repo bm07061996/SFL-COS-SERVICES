@@ -61,6 +61,8 @@ $app->singleton(
 
 $app->configure('app');
 $app->configure('database');
+$app->configure('depositservices');
+$app->configure('loanservices');
 
 /*
 |--------------------------------------------------------------------------
@@ -77,9 +79,10 @@ $app->configure('database');
 //     App\Http\Middleware\ExampleMiddleware::class
 // ]);
 
-// $app->routeMiddleware([
+$app->routeMiddleware([
 //     'auth' => App\Http\Middleware\Authenticate::class,
-// ]);
+    'postLoginValidator' => App\Http\Middleware\PostLoginRequestValidator::class,
+]);
 
 /*
 |--------------------------------------------------------------------------

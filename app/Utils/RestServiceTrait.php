@@ -7,11 +7,6 @@ use Illuminate\Http\Request;
 
 trait RestServiceTrait
 {
-	public function sendComponentResponse($data, Request $request)
-	{
-		$type = Arr::exists($request->all(), 'module') === true ? 'module' : 'component';
-		return ($type === "module") ? $data : $this->successResponse($data, true);
-	}
 
 	public function successResponse($data, $dataKeyRequired = false)
 	{

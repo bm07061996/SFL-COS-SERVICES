@@ -61,9 +61,9 @@ return [
             'driver'    => 'mysql',
             'host'      => env('SFL_COS_DB_MYSQL_HOST', 'localhost'),
             'port'      => env('SFL_COS_DB_MYSQL_PORT', 3306),
-            'database'  => env('SFL_COS_DB_MYSQL_CONNECTION', 'sfl'),
-            'username'  => env('SFL_COS_DB_MYSQL_USERNAME', 'root'),
-            'password'  => env('SFL_COS_DB_MYSQL_PASSWORD', 'root@123'),
+            'database'  => env('SFL_COS_DB_MYSQL_DATABASE', ''),
+            'username'  => env('SFL_COS_DB_MYSQL_USERNAME', ''),
+            'password'  => env('SFL_COS_DB_MYSQL_PASSWORD', ''),
             'charset'   => env('DB_CHARSET', 'utf8'),
             'collation' => env('DB_COLLATION', 'utf8_unicode_ci'),
             'prefix'    => env('DB_PREFIX', ''),
@@ -93,12 +93,12 @@ return [
             'prefix'   => env('DB_PREFIX', ''),
         ],
         'mongodb' => [
-            'driver'   => 'mongodb',
-            'host'     => env('DB_NEW_HOST'),
-            'port'     => env('DB_NEW_PORT'),
-            'database' => env('DB_NEW_DATABASE'),
-            'username' => env('DB_NEW_USERNAME'),
-            'password' => env('DB_NEW_PASSWORD'),
+            'driver'   => env('SFL_COS_DB_MONGO_CONNECTION','mongodb'),
+            'host'     => env('SFL_COS_DB_MONGO_HOST','localhost'),
+            'port'     => env('SFL_COS_DB_MONGO_PORT',27017),
+            'database' => env('SFL_COS_DB_MONGO_DATABASE',''),
+            'username' => env('SFL_COS_DB_MONGO_USERNAME',''),
+            'password' => env('SFL_COS_DB_MONGO_PASSWORD',''),
             'options' => [
             //'database' => 'laravelTest' // sets the authentication database required by mongo 3
             ]

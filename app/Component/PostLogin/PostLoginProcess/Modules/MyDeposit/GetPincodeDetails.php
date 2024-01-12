@@ -1,34 +1,39 @@
 <?php
 
-namespace App\Component\PostLogin\PostLoginProcess\Modules;
+namespace App\Component\PostLogin\PostLoginProcess\Modules\MyDeposit;
 
 use App\Component\PostLogin\PostLoginProcess\PostLoginProcessAbstract;
 use App\Component\PostLogin\PostLoginProcess\PostLoginProcessInterface;
-use App\Util\Api;
-use App\Util\EmailHelperTraits;
-use App\Component\ComponentHelperTraits;
+use App\Utils\HelperTrait;
 use Illuminate\Support\Facades\Log;
-use App\Entities\FdPincodeMaster;
+use App\Repositories\Eloquent\FdPincodeRepository;
 
-class MyDeposit extends PostLoginProcessAbstract implements PostLoginProcessInterface
-{   
-    use Api, EmailHelperTraits, ComponentHelperTraits;
+class GetPincodeDetails extends PostLoginProcessAbstract implements PostLoginProcessInterface
+{ 
 
-	public function process()
+    use HelperTrait;
+
+    public $fdPincodeRepo;
+    public $data;
+
+	public function __construct($data)
 	{
-        $request = $this->data;
-        $data = empty($this->data['data']) === false ? $this->data['data'] : "";
-        if(strtolower($request['action']) =="getpincodedetails"){
-            $this->response = $this->getPincodeDetails($data);
-        } 
+		$this->data = $data;
+        $this->fdPincodeRepo =  app()->make(FdPincodeRepository::class);
+	}
+
+    public function process()
+	{
+        $data = $this->data['data'] ?? [];
+        $this->response = $this->getPincodeDetails($data);
 	    return $this;
 	}
-    public function getPincodeDetails($decryptReqData) {
+
+    public function getPincodeDetails($data) {
         try{
-            $pincode   = empty($decryptReqData['pincode']) === false ? $decryptReqData['pincode'] : '';
-            if ($pincode != ""){
-                $result = FdPincodeMaster::where('pincode',$pincode)->WhereIn('flag', ['L','R'])->get();
-                Log::info('Pincode Details'.json_encode($result));
+            $pincode    = $data['pincode'] ?? '';
+            if ($pincode) {
+			    $result = $this->fdPincodeRepo->searchByPincode($this->sanitizeEmptyVariable($data, "pincode"));
                 if(count($result) > 0) {
                     $response['message'] = 'success';
                     $response['result'] = $result;
@@ -36,7 +41,7 @@ class MyDeposit extends PostLoginProcessAbstract implements PostLoginProcessInte
                     $response['message'] = 'failure';
                     $response['result'] = 'No Records Found';
                 }
-            }else{
+            } else {
                 $response['message'] = 'failure';
                 $response['result'] = 'No Records Found';
             }
