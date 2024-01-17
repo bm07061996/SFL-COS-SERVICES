@@ -14,7 +14,7 @@ class PostLoginRequestValidator
     public function handle($request, Closure $next, $guard = null)
     {
 
-        if(in_array($request['actions'], $this->dataSkipActions) === false) {
+        if (in_array($request['actions'], $this->dataSkipActions) === false) {
             $rules = [
                 'type'      => 'required|string',
                 'action'    => 'required|string'
@@ -29,7 +29,7 @@ class PostLoginRequestValidator
 
         $validation = $this->validator($request->all(), $rules);
 
-		if(empty($validation) === false){
+		if (empty($validation) === false) {
             return $this->validationResponse($validation);
         }
 

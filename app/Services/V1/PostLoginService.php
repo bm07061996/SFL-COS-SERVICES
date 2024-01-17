@@ -15,7 +15,7 @@ class PostLoginService extends BaseService
     {
         $result = [];
         $data = $request->all();
-        if(empty($data['data']) === false && !is_array($data['data'])){
+        if (empty($data['data']) === false && !is_array($data['data'])) {
             $data['data'] = json_decode($data['data'], true);
         }
 		$data['data'] = $data['data'] ?? [];
@@ -24,14 +24,14 @@ class PostLoginService extends BaseService
         if ($postLogin) {
             if (method_exists($postLogin, $function)) {
                 $postLogin->{$function}();
-                $result = $postLogin->response ?? array('message'=>'No data found');
-                if(!empty($result['Validation'])){
+                $result = $postLogin->response ?? array('message' => 'No data found');
+                if (!empty($result['Validation'])) {
                     return $this->validationResponse($result);
                 }
             } else {
                 $result['message'] = 'Invalid request';
             }
-            if(!empty($result['message']) && $result['message'] == 'Error'){
+            if (!empty($result['message']) && $result['message'] == 'Error') {
                 return $this->validationResponse($result);
             }
             return $this->successResponse($result, true);

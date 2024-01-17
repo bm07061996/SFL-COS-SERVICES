@@ -13,9 +13,9 @@ class PostLoginFactory implements PostLoginFactoryInterface
 		$type = Str::lower($data['type']);
 		$action = Str::lower($data['action']);
 		$class = null;
-		if($type == 'mydeposit') {
+		if ($type == 'mydeposit') {
 			$class = config(sprintf("depositservices.{$action}"));
-		} else if($type == 'myloan') {
+		} else if ($type == 'myloan') {
 			$class = config(sprintf("loanservices.{$action}"));
 		}
         return class_exists($class) ? new $class($data) : null;

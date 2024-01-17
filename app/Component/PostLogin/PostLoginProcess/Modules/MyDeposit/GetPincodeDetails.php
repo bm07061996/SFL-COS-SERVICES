@@ -34,7 +34,7 @@ class GetPincodeDetails extends PostLoginProcessAbstract implements PostLoginPro
             $pincode    = $data['pincode'] ?? '';
             if ($pincode) {
 			    $result = $this->fdPincodeRepo->searchByPincode($this->sanitizeEmptyVariable($data, 'pincode'));
-                if(count($result) > 0) {
+                if (count($result) > 0) {
                     $response['message'] = 'success';
                     $response['result'] = $result;
                 } else {

@@ -12,7 +12,7 @@ class RouteServiceProvider extends ServiceProvider
         $request = app('request');
         $apiVersion = $request->header('api-version') ?? 'v1';
         $apiVersion = app()->runningInConsole() ? 'v1' : $apiVersion;
-        if(empty($apiVersion) === true){
+        if (empty($apiVersion) === true) {
             throw new Exception('API version is not passed in header.');
         }
 
