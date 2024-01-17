@@ -2,12 +2,10 @@
 
 namespace App\Services\V1;
 
+use App\Component\PostLogin\PostLoginFactory;
 use App\Services\BaseService;
 use App\Utils\RestServiceTrait;
 use Illuminate\Http\Request;
-use App\Component\PostLogin\PostLoginFactory;
-use Illuminate\Support\Facades\Log;
-
 
 class PostLoginService extends BaseService
 {    
@@ -18,28 +16,28 @@ class PostLoginService extends BaseService
         $result = [];
         $data = $request->all();
         if(empty($data['data']) === false && !is_array($data['data'])){
-            $data['data'] = json_decode($data['data'],true);
+            $data['data'] = json_decode($data['data'], true);
         }
 		$data['data'] = $data['data'] ?? [];
         $postLogin = PostLoginFactory::create($data);
-        $function = "process";
+        $function = 'process';
         if ($postLogin) {
             if (method_exists($postLogin, $function)) {
                 $postLogin->{$function}();
-                $result = $postLogin->response ?? array("message"=>"No data found");
-                if(!empty($result["Validation"])){
+                $result = $postLogin->response ?? array('message'=>'No data found');
+                if(!empty($result['Validation'])){
                     return $this->validationResponse($result);
                 }
             } else {
-                $result['message'] = "Invalid request";
+                $result['message'] = 'Invalid request';
             }
-            if(!empty($result['message']) && $result['message'] == "Error"){
+            if(!empty($result['message']) && $result['message'] == 'Error'){
                 return $this->validationResponse($result);
             }
-            return $this->successResponse($result,true);
+            return $this->successResponse($result, true);
         }else{
-            $errorResult['message'] = "Not a valid request";
-            return $this->successResponse($errorResult,true);
+            $errorResult['message'] = 'Not a valid request';
+            return $this->successResponse($errorResult, true);
         }
     }
 }

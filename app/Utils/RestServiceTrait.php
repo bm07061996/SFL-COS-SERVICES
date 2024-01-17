@@ -2,8 +2,8 @@
 
 namespace App\Utils;
 
-use Illuminate\Support\Arr;
 use Illuminate\Http\Request;
+use Illuminate\Support\Arr;
 
 trait RestServiceTrait
 {
@@ -43,7 +43,7 @@ trait RestServiceTrait
         if ($validator->fails()) {
             $messages = $validator->messages();
             $messagesFormat = [];
-            $messagesFormat["errors"] = [];
+            $messagesFormat['errors'] = [];
             foreach ($messages->toArray() as $key => $message) {
             	if (array_key_exists($key, $messagesFormat['errors']) == false) {
             		$messagesFormat['errors'][$key] = [];

@@ -19,7 +19,7 @@ class ExampleJob extends Job
      *
      * @return void
      */
-    public function handle()
+    public function handle(): void
     {
         //
     }

@@ -2,28 +2,28 @@
 
 namespace App\Http\Middleware;
 
-use Closure;
 use App\Utils\RestServiceTrait;
+use Closure;
 
 class PostLoginRequestValidator
 {
     use RestServiceTrait;
 
-    private $dataSkipActions = [ "getcomplaintproduct", "getclaimintimationinsurancetype", "getinsmasterdetails", "getinsmasterdetails", "getmyrewardsreferproduct"];
+    private $dataSkipActions = [ 'getcomplaintproduct', 'getclaimintimationinsurancetype', 'getinsmasterdetails', 'getinsmasterdetails', 'getmyrewardsreferproduct'];
 
     public function handle($request, Closure $next, $guard = null)
     {
 
         if(in_array($request['actions'], $this->dataSkipActions) === false) {
             $rules = [
-                "type"      => "required|string",
-                "action"    => "required|string"
+                'type'      => 'required|string',
+                'action'    => 'required|string'
             ];
         } else {
             $rules = [
-                "type"      => "required|string",
-                "action"    => "required|string",
-                "data"      => "required"
+                'type'      => 'required|string',
+                'action'    => 'required|string',
+                'data'      => 'required'
             ];
         }
 
