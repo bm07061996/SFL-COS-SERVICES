@@ -30,26 +30,19 @@ class GetPincodeDetails extends PostLoginProcessAbstract implements PostLoginPro
 	}
 
     public function getPincodeDetails($data) {
-        try{
-            $pincode    = $data['pincode'] ?? '';
-            if ($pincode) {
-			    $result = $this->fdPincodeRepo->searchByPincode($this->sanitizeEmptyVariable($data, 'pincode'));
-                if (count($result) > 0) {
-                    $response['message'] = 'success';
-                    $response['result'] = $result;
-                } else {
-                    $response['message'] = 'failure';
-                    $response['result'] = 'No Records Found';
-                }
+        $response = [];
+        $pincode    = $data['pincode'] ?? '';
+        if ($pincode) {
+            $result = $this->fdPincodeRepo->searchByPincode($this->sanitizeEmptyVariable($data, 'pincode'));
+            if (count($result) > 0) {
+                $response['message'] = 'success';
+                $response['result'] = $result;
             } else {
                 $response['message'] = 'failure';
                 $response['result'] = 'No Records Found';
             }
-        }catch(\Exception $e) {
-            Log::info('Pincodeinfo '.$e->getMessage());
-            $response['exception'] = $e->getMessage();
-            $response['message'] = 'Something went wrong, Please try again!';
-            $response['errorCode'] = 404;
+        } else {
+            $response['message'] = 'failure';
             $response['result'] = 'No Records Found';
         }
         return $response;  

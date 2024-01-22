@@ -63,6 +63,7 @@ $app->configure('app');
 $app->configure('database');
 $app->configure('depositservices');
 $app->configure('loanservices');
+$app->configure('jwt');
 
 /*
 |--------------------------------------------------------------------------
@@ -80,8 +81,8 @@ $app->configure('loanservices');
 // ]);
 
 $app->routeMiddleware([
-//     'auth' => App\Http\Middleware\Authenticate::class,
-    'postLoginValidator' => App\Http\Middleware\PostLoginRequestValidator::class,
+    'auth' => App\Middleware\AuthMiddleware::class,
+    'postLoginValidator' => App\Middleware\PostLoginRequestValidator::class,
 ]);
 
 /*
