@@ -19,7 +19,7 @@ class GetPincodeDetails extends PostLoginProcessAbstract implements PostLoginPro
 	public function __construct($data)
 	{
 		$this->data = $data;
-        $this->fdPincodeRepo =  app()->make(FdPincodeRepository::class);
+        $this->fdPincodeRepo = app()->make(FdPincodeRepository::class);
 	}
 
     public function process()
@@ -31,7 +31,7 @@ class GetPincodeDetails extends PostLoginProcessAbstract implements PostLoginPro
 
     public function getPincodeDetails($data) {
         $response = [];
-        $pincode    = $data['pincode'] ?? '';
+        $pincode = $data['pincode'] ?? '';
         if ($pincode) {
             $result = $this->fdPincodeRepo->searchByPincode($this->sanitizeEmptyVariable($data, 'pincode'));
             if (count($result) > 0) {

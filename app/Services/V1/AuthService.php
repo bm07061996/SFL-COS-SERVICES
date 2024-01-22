@@ -15,10 +15,9 @@ class AuthService extends BaseService
     public function login(Request $request)
     {
         $rules = [
-			'data.mobile'   => "required|max:10|regex:/^[56789]\d{9}$/",
-            'data.action'   => 'required|in:otp,mpin',
+			'data.mobile' => 'required|max:10|regex:/^[56789]\d{9}$/',
+            'data.action' => 'required|in:otp,mpin',
             'data.code' => 'required|regex:/^[0-9]{4}(?:[0-9]{2})?$/',
-
         ];
         $validation = $this->validator($request->all(), $rules);
         if (empty($validation) === false) {
@@ -35,15 +34,15 @@ class AuthService extends BaseService
         $ip = $request->ip();
         $expiration = Carbon::now()->addSeconds(3600)->timestamp;
         $token = [
-            "jti" => $tokenId,
-            "iss" => $ip,
-            "iat" => Carbon::now()->timestamp,
-            "exp" => $expiration,
-            "data" => [
-                "transKey" => $this->generateUUID()
+            'jti' => $tokenId,
+            'iss' => $ip,
+            'iat' => Carbon::now()->timestamp,
+            'exp' => $expiration,
+            'data' => [
+                'transKey' => $this->generateUUID()
             ]
         ];
-        $jwt = JWT::encode($token, $key, "HS256");
+        $jwt = JWT::encode($token, $key, 'HS256');
 
         return $this->successResponse(['token' => $jwt], true);
     }

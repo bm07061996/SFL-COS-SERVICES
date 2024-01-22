@@ -16,14 +16,14 @@ class PostLoginRequestValidator
 
         if (in_array($request['actions'], $this->dataSkipActions) === false) {
             $rules = [
-                'type'      => 'required|string',
-                'action'    => 'required|string'
+                'type' => 'required|string',
+                'action' => 'required|string'
             ];
         } else {
             $rules = [
-                'type'      => 'required|string',
-                'action'    => 'required|string',
-                'data'      => 'required'
+                'type' => 'required|string',
+                'action' => 'required|string',
+                'data' => 'required'
             ];
         }
 

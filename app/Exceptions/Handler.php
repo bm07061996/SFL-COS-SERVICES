@@ -113,12 +113,12 @@ class Handler extends ExceptionHandler
         $environment = config('app.env');
         $definition = $this->exceptionMap[$exceptionClass] ?? [
             'code' => 500,
-            'message' => ($environment=='local') ? ($exception->getMessage() ?? 'Something went wrong while processing your request') : 'Something went wrong while processing your request',
+            'message' => ($environment == 'local') ? ($exception->getMessage() ?? 'Something went wrong while processing your request') : 'Something went wrong while processing your request',
             'adaptMessage' => false,
         ];
     
         if (empty($definition['adaptMessage']) === false) {        
-            $definition['message'] = ($environment=='local') ? ($exception->getMessage() ?? $definition['message']) : 'Something went wrong while processing your request';        
+            $definition['message'] = ($environment == 'local') ? ($exception->getMessage() ?? $definition['message']) : 'Something went wrong while processing your request';        
         }
         
         $response = [

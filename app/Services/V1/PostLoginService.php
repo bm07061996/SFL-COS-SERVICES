@@ -35,7 +35,7 @@ class PostLoginService extends BaseService
                 return $this->validationResponse($result);
             }
             return $this->successResponse($result, true);
-        }else{
+        } else {
             $errorResult['message'] = 'Not a valid request';
             return $this->successResponse($errorResult, true);
         }

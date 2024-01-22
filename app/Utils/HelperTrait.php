@@ -14,7 +14,7 @@ trait HelperTrait
 
 	public function generateUUID()
 	{
-		$prefix = sprintf("%s-%s-%s", microtime(true), getmypid(), gethostname());
+		$prefix = sprintf('%s-%s-%s', microtime(true), getmypid(), gethostname());
 		return md5(uniqid($prefix, true));
 	}
 }

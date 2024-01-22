@@ -2,12 +2,11 @@
 
 namespace App\Middleware;
 
+use App\Utils\RestServiceTrait;
 use Closure;
 use Exception;
 use Firebase\JWT\JWT;
 use Firebase\JWT\Key;
-use App\Utils\RestServiceTrait;
-use App\Exceptions\UnauthorizedException;
 
 class AuthMiddleware
 {
