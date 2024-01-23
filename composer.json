@@ -7,6 +7,7 @@
     "require": {
         "php": "^8.0",
         "firebase/php-jwt": "^6.10",
+        "guzzlehttp/guzzle": "^7.8",
         "laravel/lumen-framework": "^9.0",
         "prettus/l5-repository": "^2.8"
     },
@@ -38,7 +39,7 @@
         "preferred-install": "dist",
         "sort-packages": true,
         "allow-plugins": {
-            "dealerdirect/phpcodesniffer-composer-installer": true
+            "dealerdirect/phpcodesniffer-composer-installer": false
         }
     },
     "minimum-stability": "dev",

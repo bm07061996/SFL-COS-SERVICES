@@ -5,8 +5,8 @@ namespace App\Utils;
 use Illuminate\Http\Request;
 use Illuminate\Support\Arr;
 
-trait RestServiceTrait {
-
+trait RestServiceTrait
+{
 	public function successResponse($data, $dataKeyRequired = false)
 	{
 		$response = [
